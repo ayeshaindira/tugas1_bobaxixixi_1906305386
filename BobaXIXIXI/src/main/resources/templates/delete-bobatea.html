@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>BobaXIXIXI</title>
+  <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+  <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+  <style>
+    a.back {
+      color:#ef9750;
+      background-color: transparent;
+      text-decoration: none;
+    }
+    a:hover {
+      color: #62433d;
+      background-color: transparent;
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body style="background-color:#feecd9">
+<nav th:replace="fragments/fragment :: navbar('Boba')"></nav>
+<div class="container">
+  <div class="card m-4 p-4">
+    <div class="card-body">
+      <div class="justify-content-center">
+        <h2 style="text-align: center" th:text="${bobatea} + ' successfully deleted!'"></h2>
+        <div style="text-align: center;">
+          <br>
+          <a class="back" href="/boba" style="align-self: center">← Back to Boba Tea List</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

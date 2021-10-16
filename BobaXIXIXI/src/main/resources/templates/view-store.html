@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>BOBAXIXIXI</title>
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+<body style="background-color:#feecd9">
+<nav th:replace="fragments/fragment :: navbar('Boba')"></nav>
+<div class="d-flex justify-content-center">
+    <div class="m-4">
+        <div class="card">
+            <div class="card-body text-center">
+                <h2 style="color:#62433d">Store Detail</h2>
+                <br>
+                <p th:text="'Store Name     : ' + ${store.storeName}"></p>
+                <p th:text="'Address        : ' + ${store.storeAddress}"></p>
+                <p th:text="'Open Hour      : ' + ${store.openHour}"></p>
+                <p th:text="'Close Hour     : ' + ${store.closeHour}"></p>
+                <p th:text="'Manager        : ' + ${store.manager.fullName}"></p>
+                <p th:text="'Store Code     : ' + ${store.storePhone}"></p>
+
+                <div th:if="*{listBobaTea.size() != 0}">
+                    <br>
+                    <h3 style="color:#62433d">List of Boba Tea</h3>
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Name</th>
+                            <th>Topping</th>
+                            <th>Price</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="bobatea, iterationStatus : ${listBobaTea}">
+                            <td th:text="${iterationStatus.count}"></td>
+                            <td th:text="${bobatea.bobaTeaName}"></td>
+                            <td th:text="${bobatea.topping.toppingName}"></td>
+                            <td th:text="'Rp' + ${bobatea.bobaTeaPrice}"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <a class="btn btn-light" th:href="@{/}">+ Add Boba Tea to Store</a>
+                </div>
+                <div th:unless="*{listBobaTea.size() != 0}">
+                    <br>
+                    <h3 style="color:#62433d" th:text="'No Boba Tea Available'"></h3>
+                    <br>
+                    <a class="btn btn-light" href="/boba/add">+ Add Boba Tea</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

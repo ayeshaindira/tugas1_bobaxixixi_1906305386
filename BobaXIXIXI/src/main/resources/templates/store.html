@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>BOBAXIXIXI</title>
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+    <style>
+        #brown {
+            background-color: #62433d;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body style="background-color:#feecd9">
+<nav th:replace="fragments/fragment :: navbar('Store')"></nav>
+<div class="d-flex justify-content-center">
+    <div class="m-4">
+        <div class="card">
+            <div class="card-body text-center">
+                <h2 style="color:#62433d">List of Stores</h2>
+                <a class="btn btn-light" style="float: left" href="/store/add">+ Add Store</a>
+                <br>
+                <div th:if="*{listStore.size() != 0}">
+                    <br>
+                    <table class="table">
+                        <thead class="thead-dark" id="brown">
+                        <tr>
+                            <th>No</th>
+                            <th>Store Code</th>
+                            <th>Name</th>
+                            <th>Address</th>
+                            <th>Operational Hour</th>
+                            <th></th>
+                            <th>Action</th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="store, iterationStatus : ${listStore}">
+                            <td th:text="${iterationStatus.count}"></td>
+                            <td th:text="${store.storePhone}"></td>
+                            <td th:text="${store.storeName}"></td>
+                            <td th:text="${store.storeAddress}"></td>
+                            <td th:text="${store.openHour} + ' - ' + ${store.closeHour}"></td>
+                            <td><a class="btn btn-info" th:href="@{/store/view/} + ${store.idStore}">View</a></td>
+                            <td><a class="btn btn-warning" th:href="@{/store/update/} + ${store.idStore}">Update</a></td>
+                            <td><a class="btn btn-danger" th:href="@{/store/delete/} + ${store.idStore}">Delete</a></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div th:unless="*{listStore.size() != 0}">
+                    <br>
+                    <h2 style="color:#62433d" th:text="'No Store Available'"></h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

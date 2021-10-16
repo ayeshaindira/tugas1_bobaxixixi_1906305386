@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>BOBAXIXIXI</title>
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+    <style>
+        #brown {
+            background-color: #62433d;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body style="background-color:#feecd9">
+<nav th:replace="fragments/fragment :: navbar('Search')"></nav>
+<div class="container">
+    <div class="card m-4 p-4">
+        <div class="card-body">
+            <div class="justify-content-center">
+                <h2 style="color:#62433d; text-align: center">Filter Manager</h2>
+                <br>
+                <form th:action="@{/filter/manager}" method="GET">
+                    <div class="form-row">
+                        <div class="form-group col-md-3">
+                        </div>
+                        <div class="form-group col-md-6">
+                            Boba Tea Name: <br>
+                            <select class="form-control" name="bobaTeaName">
+                                <option value="">-- Select Boba Tea Name --</option>
+                                <option th:each="bobatea : ${listBobaTea}" th:value="${bobatea.bobaTeaName}" th:text="${bobatea.bobaTeaName}"></option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-3">
+                        </div>
+                        <div style="text-align: center" class="form-group col-md-12">
+                            <button class="btn btn-primary text-white" type="submit">Search</button>
+                        </div>
+                    </div>
+                </form>
+                <table class="table">
+                    <thead class="thead-dark" id="brown">
+                    <tr>
+                        <td>No</td>
+                        <td>Name</td>
+                        <td>Gender</td>
+                        <td>Date of Birth</td>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="managers, iterationStatus : ${managers}">
+                        <td th:text="${iterationStatus.count}"></td>
+                        <td th:text="${managers.store.manager.fullName}"></td>
+                        <td th:if="${managers.store.manager.Gender} == 1">Laki-Laki</td>
+                        <td th:if="${managers.store.manager.Gender} == 0">Perempuan</td>
+                        <td th:text="${managers.store.manager.dateOfBirth}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

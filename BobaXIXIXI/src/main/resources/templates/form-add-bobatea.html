@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>BOBAXIXIXI</title>
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+<body style="background-color:#feecd9">
+<nav th:replace="fragments/fragment :: navbar('Boba')"></nav>
+<div class="container">
+    <div class="card m-4 p-4">
+        <div class="card-body">
+            <div class="justify-content-center">
+                <h2 style="color:#62433d; text-align: center">Add New Boba Tea</h2>
+                <form th:action="@{/boba/add}" th:object="${bobatea}" method="POST">
+                    <div class="form-group">
+                        Boba Tea Name: <br>
+                        <input type="text" class="form-control" name="bobaTeaName" rows="5" placeholder="Tea name..">
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            Price: <br>
+                            <input type="text" class="form-control" name="bobaTeaPrice" placeholder="Price...">
+                        </div>
+                        <div class="form-group col-md-6">
+                            Size: <br>
+                            <select class="form-control" name="bobaTeaSize">
+                                <option value="0">Small</option>
+                                <option value="1">Medium</option>
+                                <option value="2">Large</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            Sugar Level: <br>
+                            <select class="form-control" name="bobaTeaSugarLevel">
+                                <option value="0">Less</option>
+                                <option value="1">Normal</option>
+                                <option value="2">Extra</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-6">
+                            Ice Level: <br>
+                            <select class="form-control" name="bobaTeaIceLevel">
+                                <option value="0">Less</option>
+                                <option value="1">Normal</option>
+                                <option value="2">Extra</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            Topping: <br>
+                            <select class="form-control" name="topping">
+                                <option th:each="topping : ${existingTopping}" th:value="${topping.idTopping}" th:text="${topping.toppingName}"></option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-12 text-center">
+                        <a style="align-self: center" class="btn btn-outline-primary" href="/">Cancel</a>
+                        <button style="align-self: center" class="btn btn-primary" type="submit">Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

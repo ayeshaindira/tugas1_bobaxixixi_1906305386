@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>BOBAXIXIXI</title>
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+<body style="background-color:#feecd9">
+<nav th:replace="fragments/fragment :: navbar('Boba')"></nav>
+<div class="d-flex justify-content-center">
+    <div class="m-4">
+        <div class="card">
+            <div class="card-body text-center">
+                <h2 style="color:#62433d">List of Boba Tea</h2>
+                <a class="btn btn-light" style="float: left" href="/boba/add">+ Add Boba Tea</a>
+                <br>
+                    <div th:if="*{listBobaTea.size() != 0}">
+                        <br>
+                    <table class="thead-dark">
+                        <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Nama</th>
+                            <th>Price</th>
+                            <th>Size</th>
+                            <th>Ice</th>
+                            <th>Sugar</th>
+                            <th>Topping</th>
+                            <th></th>
+                            <th>Action</th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="bobatea, iterationStatus : ${listBobaTea}">
+                            <td th:text="${iterationStatus.count}"></td>
+                            <td th:text="${bobatea.bobaTeaName}"></td>
+                            <div th:with="result=${bobatea.bobaTeaPrice + bobatea.topping.toppingPrice}">
+                                <td th:text="'Rp' + ${result}"></td>
+                            </div>
+                            <td th:if="${bobatea.bobaTeaSize} == 0">Small</td>
+                            <td th:if="${bobatea.bobaTeaSize} == 1">Medium</td>
+                            <td th:if="${bobatea.bobaTeaSize} == 2">Large</td>
+                            <td th:if="${bobatea.bobaTeaIceLevel} == 0">Less</td>
+                            <td th:if="${bobatea.bobaTeaIceLevel} == 1">Normal</td>
+                            <td th:if="${bobatea.bobaTeaIceLevel} == 2">Extra</td>
+                            <td th:if="${bobatea.bobaTeaSugarLevel} == 0">Less</td>
+                            <td th:if="${bobatea.bobaTeaSugarLevel} == 1">Normal</td>
+                            <td th:if="${bobatea.bobaTeaSugarLevel} == 2">Extra</td>
+                            <td th:text="${bobatea.topping.toppingName}"></td>
+                            <td><a class="btn btn-info">Assign</a></td>
+                            <td><a class="btn btn-warning" th:href="@{/boba/update/} + ${bobatea.idBobaTea}">Update</a></td>
+                            <td><a class="btn btn-danger" th:href="@{/boba/remove/} + ${bobatea.idBobaTea}">Delete</a></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div th:unless="*{listBobaTea.size() != 0}">
+                    <br>
+                    <h2 style="color:#62433d" th:text="'No Boba Tea Available'"></h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

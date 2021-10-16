@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+    <head th:fragment="css">
+        <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+    </head>
+    <head th:fragment="js">
+        <script
+                src="https://code.jquery.com/jquery-3.4.1.min.js"
+                integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFIBw8HfCJO="
+                crossorigin="anonymous">
+        </script>
+        <script src="https://getbootsrap.com/docs/4.1/assets/js/vendor/poppermin.js"></script>
+        <script th:src="@{/js/bootstrap.min.js}"></script>
+    </head>
+</head>
+<body>
+<nav th:fragment="navbar(page)" class="navbar navbar-expand-lg" style="background-color: #62433d">
+    <a class="navbar-brand font-weight-bold" style="color:#ffffff" href="/">BOBAXIXIXI</a>
+    <button
+            class="navbar-toggler"
+            type="button"
+            data-toggle="collapse"
+            data-target="#navbarNavAltMarkup"
+            aria-controls="navbarNavAltMarkup"
+            aria-expanded="false"
+            aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse">
+        <ul class="navbar-nav mr-auto">
+            <li th:classappend="${page == 'Store'} ? active : ''" class="nav-item">
+                <a class="nav-link" style="color:#ffffff" href="/store">Store</a>
+            </li>
+            <li th:classappend="${page == 'Boba Tea'} ? active : ''" class="nav-item">
+                <a class="nav-link" style="color:#ffffff" href="/boba">Boba Tea</a>
+            </li>
+            <li th:classappend="${page == 'Search'} ? active : ''" class="nav-item">
+                <a class="nav-link" style="color:#ffffff" href="/search">Search</a>
+            </li>
+            <li th:classappend="${page == 'Filter'} ? active : ''" class="nav-item">
+                <a class="nav-link" style="color:#ffffff" href="/filter/manager">Filter</a>
+            </li>
+        </ul><!--
+        <form class="form-inline my-2 my-lg-0" th:action="@{/agensi/view}" method="GET">
+            <input class="form-control mr-sm-2" type="search"
+                   name="noAgensi" placeholder="No Agensi" aria-label="Search">
+            <button class="btn btn-outline-primary my-2 my-sm-o" type="submit">Search</button>
+        </form>-->
+    </div>
+</nav>
+</body>
+</html>
